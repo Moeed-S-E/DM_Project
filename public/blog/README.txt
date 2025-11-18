@@ -1,0 +1,1 @@
+// This folder will contain blog images. Name each image as the blog slug (e.g., best-phones-2025.jpg).

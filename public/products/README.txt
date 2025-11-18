@@ -1,0 +1,1 @@
+// This folder will contain product images. Name each image as the product slug (e.g., samsung-galaxy-s24.jpg).

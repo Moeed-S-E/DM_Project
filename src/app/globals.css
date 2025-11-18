@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure good text contrast in light theme */
+html:not(.dark) body {
+  color: var(--text-primary);
+}
+
+html:not(.dark) a {
+  color: var(--text-link);
+}
+
+html:not(.dark) a:hover {
+  text-decoration: underline;
+}
+
+/* Ensure form elements have good contrast */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  border-color: var(--level1-border);
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.white {
+  color: white !important;
+}

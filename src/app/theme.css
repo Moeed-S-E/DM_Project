@@ -1,0 +1,80 @@
+:root {
+    --primary-blue: #4F46E5;
+    --secondary-teal: #14B8A6;
+    --accent-coral: #FB7185;
+    --base-white: #FFFFFF;
+    --soft-gray: #F8FAFC;
+    --light-blue: #EFF6FF;
+    --subtle-lavender: #F5F3FF;
+
+    --level1-bg: #DBEAFE;
+    --level1-border: #3B82F6;
+    --level1-text: #1E3A8A;
+    --level-1: #F3F4F6;
+
+    --level2-bg: #D1FAE5;
+    --level2-border: #10B981;
+    --level2-text: #065F46;
+
+    --level3-bg: #E9D5FF;
+    --level3-border: #A855F7;
+    --level3-text: #6B21A8;
+
+    --level4-bg: #FED7AA;
+    --level4-border: #F97316;
+    --level4-text: #9A3412;
+
+    --success: #22C55E;
+    --warning: #FBBF24;
+    --error: #EF4444;
+    --info: #06B6D4;
+
+    --price-tag: #DC2626;
+    --original-price: #9CA3AF;
+    --in-stock: #059669;
+    --sale-badge: #EA580C;
+    --premium: #7C3AED;
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --text-link: #2563EB;
+
+    --shadow: rgba(0, 0, 0, 0.05);
+    --hover-glow: rgba(79, 70, 229, 0.15);
+
+    --bg-color: var(--base-white);
+    --text-color: var(--text-primary);
+    --card-bg: var(--base-white);
+}
+
+html.dark {
+    --base-white: #0F172A;
+    --soft-gray: #1E293B;
+    --light-blue: #1E3A5F;
+    --subtle-lavender: #2D2440;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #64748B;
+    --bg-color: #0F172A;
+    --text-color: #F1F5F9;
+    --card-bg: #1E293B;
+    --level-1: #27364A;
+    --level1-bg: #1E293B;
+    --level1-border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure good contrast for light theme on mobile */
+html:not(.dark) {
+    --text-secondary: #64748B;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
