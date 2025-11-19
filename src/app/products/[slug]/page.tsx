@@ -8,6 +8,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   const [product, setProduct] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
+  const [stock, setStock] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -20,6 +21,7 @@ export default function ProductDetailPage() {
         })
         .then((data) => {
           setProduct(data);
+          setStock(data.stock ?? 0);
           setLoading(false);
         })
         .catch(() => {
@@ -29,19 +31,40 @@ export default function ProductDetailPage() {
     }
   }, [params?.slug]);
 
-  const handleAddToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existingItem = cart.find((item: any) => item.id === product.id);
-
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({ ...product, quantity });
+  const handleAddToCart = async () => {
+    if (!product) return;
+    if (quantity <= 0) return;
+    if ((stock ?? product.stock) <= 0) {
+      alert('Product out of stock');
+      return;
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
-    setQuantity(1);
+    try {
+      const res = await fetch('/api/cart/decrement', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: product.id, quantity }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (data && data.stock !== undefined) setStock(data.stock);
+        alert(data?.error || 'Could not add to cart');
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingItem = cart.find((item: any) => item.id === product.id);
+      if (existingItem) existingItem.quantity += quantity;
+      else cart.push({ ...product, quantity });
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      setStock((s) => (s !== null ? s - quantity : (product.stock ?? 0) - quantity));
+      setQuantity(1);
+      alert('Added to cart!');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to add to cart');
+    }
   };
 
   if (loading) {

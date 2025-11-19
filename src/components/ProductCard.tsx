@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function ProductCard({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1);
+  const [stock, setStock] = useState<number>(product.stock ?? 0);
 
   // Dynamic alt tag generation
   let alt = `${product.title} - ${product.category} at MHMmobiles`;
@@ -13,19 +14,43 @@ export default function ProductCard({ product }: { product: any }) {
     if (keywords) alt += ` - ${keywords}`;
   }
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existingItem = cart.find((item: any) => item.id === product.id);
-    
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({ ...product, quantity });
+    if (quantity <= 0) return;
+    if (stock <= 0) {
+      alert('Product is out of stock');
+      return;
     }
-    
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
+
+    // call server to decrement stock
+    try {
+      const res = await fetch('/api/cart/decrement', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: product.id, quantity }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (data && data.stock !== undefined) setStock(data.stock);
+        alert(data?.error || 'Could not add to cart');
+        return;
+      }
+
+      // update local cart
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingItem = cart.find((item: any) => item.id === product.id);
+      if (existingItem) existingItem.quantity += quantity;
+      else cart.push({ ...product, quantity });
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // update UI stock
+      setStock((s) => s - quantity);
+      setQuantity(1);
+      alert('Added to cart!');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to add to cart');
+    }
   };
 
   return (
@@ -39,7 +64,7 @@ export default function ProductCard({ product }: { product: any }) {
               width={240}
               height={240}
               loading="lazy"
-              className="w-full h-full object-cover hover:scale-105 transition"
+              className="w-full h-full object-contain scale-90 hover:scale-100 transition"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[var(--level1-bg)] to-[var(--level1-border)] flex items-center justify-center">
@@ -103,7 +128,7 @@ export default function ProductCard({ product }: { product: any }) {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  setQuantity(Math.min(product.stock, quantity + 1));
+                  setQuantity(Math.min(stock, quantity + 1));
                 }}
                 className="px-2 py-1 bg-[var(--level1-bg)] hover:bg-[var(--level1-border)] rounded transition text-xs"
               >
@@ -112,7 +137,7 @@ export default function ProductCard({ product }: { product: any }) {
             </div>
             <button
               onClick={handleAddToCart}
-              disabled={product.stock === 0}
+              disabled={stock === 0}
               className="w-full px-3 py-2 bg-[var(--primary-blue)] text-white rounded font-semibold text-xs md:text-sm hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Add to Cart
