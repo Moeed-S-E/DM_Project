@@ -9,7 +9,7 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/admin/products')
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/products`)
       .then((r) => r.json())
       .then((data) => setProducts(data))
       .catch(console.error)
@@ -18,7 +18,7 @@ export default function AdminProductsPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this product?')) return;
-    await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/products/${id}`, { method: 'DELETE' });
     setProducts((p) => p.filter((x) => x.id !== id));
   };
 

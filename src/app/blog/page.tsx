@@ -9,7 +9,7 @@ export default function BlogPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/blog")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/blog`)
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);

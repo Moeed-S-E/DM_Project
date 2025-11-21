@@ -8,7 +8,7 @@ export default function AdminBlogPage() {
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/api/admin/blog')
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/blog`)
       .then((r) => r.json())
       .then((data) => setPosts(data))
       .catch(console.error);
@@ -16,7 +16,7 @@ export default function AdminBlogPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this post?')) return;
-    await fetch(`/api/admin/blog/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/blog/${id}`, { method: 'DELETE' });
     setPosts((p) => p.filter((x) => x.id !== id));
   };
 

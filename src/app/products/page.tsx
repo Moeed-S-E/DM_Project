@@ -12,7 +12,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/products")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
