@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import dynamic from "next/dynamic";
 import "./globals.css";
+import Canonical from "@/components/Canonical";
+import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: true });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
@@ -49,6 +50,8 @@ export const metadata: Metadata = {
     description: "Shop premium mobiles at the best prices in Pakistan.",
     images: ["/logo.webp"],
   },
+  // Provide a base URL so Next can resolve open graph/twitter images reliably
+  metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE || "http://localhost:3000"),
   robots: {
     index: true,
     follow: true,
@@ -65,16 +68,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         {/* Preconnect to CDN for faster resource loading */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload critical image resources only */}
-        <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
+        <Canonical />
+        {/* Critical image requests are handled via `next/image` priority — remove manual preload */}
         
         {/* Optimize for slow connections */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
@@ -83,6 +85,47 @@ export default function RootLayout({
         {/* Performance optimization - reduce Cumulative Layout Shift */}
         <meta name="theme-color" content="#4F46E5" />
         <meta name="description" content="MHMmobiles - Premium mobiles at best prices in Pakistan" />
+        {/* Open Graph / Twitter meta tags for social cards */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="MHMmobiles" />
+        <meta property="og:title" content="MHMmobiles | Premium Mobiles & Accessories" />
+        <meta property="og:description" content="Shop premium mobiles and accessories at the best prices in Pakistan." />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_METADATA_BASE || "http://localhost:3000"} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_METADATA_BASE || "http://localhost:3000"}/logo.webp`} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="MHMmobiles | Premium Mobiles & Accessories" />
+        <meta name="twitter:description" content="Shop premium mobiles and accessories at the best prices in Pakistan." />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_METADATA_BASE || "http://localhost:3000"}/logo.webp`} />
+        {/* Canonical link for the site (uses NEXT_PUBLIC_METADATA_BASE if set) */}
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com"} />
+        {/* JSON-LD structured data for Organization + WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "name": "MHMmobiles",
+                  "url": process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com",
+                  "logo": `${process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com"}/logo.webp`,
+                  "sameAs": []
+                },
+                {
+                  "@type": "WebSite",
+                  "url": process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": `${process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com"}/search?q={search_term_string}`,
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ]
+            }),
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -102,6 +145,7 @@ export default function RootLayout({
         <div className="min-h-[80vh] flex flex-col">
           {children}
         </div>
+        
         <Footer />
       </body>
     </html>

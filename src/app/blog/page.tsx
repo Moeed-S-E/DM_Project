@@ -55,6 +55,8 @@ export default function BlogPage() {
                           height={340}
                           loading="lazy"
                           className="w-full h-full object-cover group-hover:scale-105 transition"
+                          // If the image is external, skip Next's optimization to avoid proxy timeouts in dev
+                          unoptimized={blog.coverImage.startsWith('http')}
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-[var(--level1-bg)] to-[var(--level1-border)] flex items-center justify-center">
@@ -66,11 +68,11 @@ export default function BlogPage() {
                       <h2 className="text-lg md:text-xl font-semibold text-[var(--text-color)] mb-2 line-clamp-2 group-hover:text-[var(--primary-blue)] transition">
                         {blog.title}
                       </h2>
-                      <p className="text-xs md:text-sm text-[var(--text-muted)] mb-4 line-clamp-3">
-                        {blog.content.replace(/<[^>]*>/g, "").substring(0, 150)}...
-                      </p>
-                      <div className="mt-auto flex items-center justify-between text-xs text-[var(--text-muted)]">
-                        <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+                                <p className="text-xs md:text-sm text-[var(--text-muted)] mb-4 line-clamp-3">
+                                  {(blog.content ?? "").replace(/<[^>]*>/g, "").substring(0, 150)}{(blog.content ?? "").length > 150 ? "..." : ""}
+                                </p>
+                                <div className="mt-auto flex items-center justify-between text-xs text-[var(--text-muted)]">
+                                  <span>{blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : ""}</span>
                         <span className="text-[var(--primary-blue)] font-semibold group-hover:translate-x-1 transition">
                           Read →
                         </span>

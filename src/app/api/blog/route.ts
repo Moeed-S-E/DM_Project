@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
         id: true,
         title: true,
         slug: true,
+        content: true,
         coverImage: true,
         createdAt: true,
       },
