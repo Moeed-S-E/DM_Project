@@ -1,4 +1,5 @@
 import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
@@ -28,8 +29,16 @@ app.post('/api/admin/login', async (req, res) => {
   res.json({ token });
 });
 
+// Extend Express Request type to include user
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
 // JWT middleware
-function auth(req, res, next) {
+function auth(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.sendStatus(401);
   const token = authHeader.split(' ')[1];
@@ -88,10 +97,12 @@ app.delete('/api/blog/:id', auth, async (req, res) => {
 });
 
 // Image upload
-app.post('/api/upload/product', auth, uploadProducts.single('image'), (req, res) => {
+app.post('/api/upload/product', auth, uploadProducts.single('image'), (req: Request, res: Response) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
   res.json({ filename: req.file.filename });
 });
-app.post('/api/upload/blog', auth, uploadBlog.single('image'), (req, res) => {
+app.post('/api/upload/blog', auth, uploadBlog.single('image'), (req: Request, res: Response) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
   res.json({ filename: req.file.filename });
 });
 
@@ -119,6 +130,8 @@ app.post('/api/contact', async (req, res) => {
 // Serve static images
 app.use('/products', express.static(path.join(__dirname, '../public/products')));
 app.use('/blog', express.static(path.join(__dirname, '../public/blog')));
+
+
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Express API running on port ${PORT}`));
