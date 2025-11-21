@@ -58,14 +58,23 @@ export default function ProductCard({ product }: { product: any }) {
       <div className="bg-[var(--card-bg)] rounded-lg shadow-md hover:shadow-xl transition overflow-hidden h-full flex flex-col">
         <div className="relative w-full aspect-square bg-[var(--level1-bg)] flex items-center justify-center overflow-hidden">
           {product.image ? (
-            <Image
-              src={`/products/${product.image}`}
-              alt={alt}
-              width={240}
-              height={240}
-              loading="lazy"
-              className="w-full h-full object-contain scale-90 hover:scale-100 transition"
-            />
+            (() => {
+              const src = product.image?.startsWith('http')
+                ? product.image
+                : product.image?.startsWith('/')
+                ? product.image
+                : `/products/${product.image}`;
+              return (
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={240}
+                  height={240}
+                  loading="lazy"
+                  className="w-full h-full object-contain scale-90 hover:scale-100 transition"
+                />
+              );
+            })()
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[var(--level1-bg)] to-[var(--level1-border)] flex items-center justify-center">
               <span className="text-[var(--text-muted)]">No image</span>

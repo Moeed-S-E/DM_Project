@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import dynamic from "next/dynamic";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: true });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -64,18 +68,21 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Preconnect to CDN for faster resource loading */}
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Preload critical resources */}
-        <link rel="preload" href="/logo.webp" as="image" />
+        {/* Preload critical image resources only */}
+        <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
         
         {/* Optimize for slow connections */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
         <meta httpEquiv="x-ua-compatible" content="IE=edge" />
         
         {/* Performance optimization - reduce Cumulative Layout Shift */}
         <meta name="theme-color" content="#4F46E5" />
+        <meta name="description" content="MHMmobiles - Premium mobiles at best prices in Pakistan" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

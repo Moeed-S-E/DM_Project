@@ -97,7 +97,11 @@ export default function ProductDetailPage() {
     if (keywords) alt += ` - ${keywords}`;
   }
 
-  const productImageSrc = product.image?.startsWith('http') ? product.image : `/products/${product.image}`;
+  const productImageSrc = product.image?.startsWith('http')
+    ? product.image
+    : product.image?.startsWith('/')
+    ? product.image
+    : `/products/${product.image}`;
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] py-8">

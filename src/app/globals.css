@@ -38,7 +38,3 @@ html:not(.dark) input::placeholder,
 html:not(.dark) textarea::placeholder {
   color: var(--text-muted);
 }
-
-.white {
-  color: white !important;
-}

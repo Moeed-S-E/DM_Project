@@ -34,7 +34,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(product);
   } catch (error) {
-    console.error("Error creating product:", error);
-    return NextResponse.json({ error: "Failed to create product" }, { status: 500 });
+    console.error("Error creating product:", error instanceof Error ? error.message : error, error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    const errStack = error instanceof Error && (error as Error).stack ? (error as Error).stack : undefined;
+    return NextResponse.json({ error: `Failed to create product: ${errMsg}`, stack: errStack }, { status: 500 });
   }
 }

@@ -28,7 +28,11 @@ export default function BlogDetailPage() {
     if (keywords) alt += ` — ${keywords.replace(/-/g, ' ')}`;
   }
 
-  const blogImageSrc = blog.coverImage?.startsWith('http') ? blog.coverImage : `/blog/${blog.coverImage}`;
+  const blogImageSrc = blog.coverImage?.startsWith('http')
+    ? blog.coverImage
+    : blog.coverImage?.startsWith('/')
+    ? blog.coverImage
+    : `/blog/${blog.coverImage}`;
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-8 bg-[var(--bg-color)] text-[var(--text-color)]">

@@ -29,10 +29,10 @@ export default function HeroSection() {
           Premium Mobiles & Accessories at the Best Prices
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <a href="/products" className="px-6 py-3 rounded-lg bg-white text-primary-blue font-semibold shadow hover:shadow-lg hover:scale-105 transition transform">
+          <a href="/products" className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--text-link)] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap">
             Shop Now
           </a>
-          <a href="/products?category=accessories" className="px-6 py-3 rounded-lg bg-white white text-accent-coral font-semibold shadow hover:shadow-lg hover:scale-105 transition transform">
+          <a href="/products?category=accessories" className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--text-link)] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap">
             Explore Accessories
           </a>
         </div>

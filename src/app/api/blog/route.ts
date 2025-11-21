@@ -4,6 +4,13 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const blogs = await prisma.blog.findMany({
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        coverImage: true,
+        createdAt: true,
+      },
       orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(blogs);

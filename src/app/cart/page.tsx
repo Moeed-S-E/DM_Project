@@ -74,13 +74,22 @@ export default function Cart() {
               >
                 <div className="w-24 h-24 flex-shrink-0 bg-[var(--level1-bg)] rounded flex items-center justify-center">
                   {item.image ? (
-                    <Image
-                      src={`/products/${item.image}`}
-                      alt={item.title}
-                      width={96}
-                      height={96}
-                      className="w-full h-full object-cover rounded"
-                    />
+                    (() => {
+                      const src = item.image?.startsWith('http')
+                        ? item.image
+                        : item.image?.startsWith('/')
+                        ? item.image
+                        : `/products/${item.image}`;
+                      return (
+                        <Image
+                          src={src}
+                          alt={item.title}
+                          width={96}
+                          height={96}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      );
+                    })()
                   ) : (
                     <span className="text-[var(--text-muted)]">No image</span>
                   )}
