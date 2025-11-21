@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc && prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
@@ -16,7 +16,8 @@
     "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.8",
-    "prisma": "^5.0.0"
+    "prisma": "^5.0.0",
+    "@types/nodemailer": "^7.0.4"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -25,7 +26,6 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/multer": "^1.4.7",
     "@types/node": "^20.4.2",
-    "@types/nodemailer": "^7.0.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   }
