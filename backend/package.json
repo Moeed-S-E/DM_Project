@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "start": "node dist/index.js",
-    "build": "tsc && prisma generate"
+    "build": "tsc && prisma generate",
+    "postinstall": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
