@@ -1,0 +1,132 @@
+.
+├── backend
+│   ├── index.ts
+│   ├── package.json
+│   ├── package-lock.json
+│   └── tsconfig.json
+├── eslint.config.mjs
+├── fd.txt
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── prisma
+│   └── schema.prisma
+├── public
+│   ├── blog
+│   │   ├── logo.webp
+│   │   └── README.txt
+│   ├── hero.mp4
+│   ├── logo.webp
+│   └── products
+│       ├── charger-65w.webp
+│       ├── earbuds-pro.webp
+│       ├── infinix-zero-30.webp
+│       ├── iphone-15-pro.webp
+│       ├── iphone-17.webp
+│       ├── README.txt
+│       ├── redmi-note-13.webp
+│       ├── samsung-a15.webp
+│       ├── samsung-s24.webp
+│       ├── sgs.png
+│       ├── sss.jpg
+│       ├── sss.png
+│       ├── tecno-spark-20.webp
+│       ├── test.jpg
+│       └── vivo-x100.webp
+├── README.md
+├── src
+│   ├── app
+│   │   ├── about
+│   │   │   ├── head.tsx
+│   │   │   └── page.tsx
+│   │   ├── admin
+│   │   │   ├── blog
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── edit
+│   │   │   │   │       └── page.tsx
+│   │   │   │   ├── new
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── dashboard
+│   │   │   │   └── page.tsx
+│   │   │   ├── login
+│   │   │   │   └── page.tsx
+│   │   │   └── products
+│   │   │       ├── [id]
+│   │   │       │   └── edit
+│   │   │       │       └── page.tsx
+│   │   │       ├── new
+│   │   │       │   └── page.tsx
+│   │   │       └── page.tsx
+│   │   ├── api
+│   │   │   ├── admin
+│   │   │   │   ├── blog
+│   │   │   │   │   ├── [id]
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── products
+│   │   │   │       ├── [id]
+│   │   │   │       │   └── route.ts
+│   │   │   │       └── route.ts
+│   │   │   ├── blog
+│   │   │   │   ├── route.ts
+│   │   │   │   └── [slug]
+│   │   │   │       └── route.ts
+│   │   │   ├── cart
+│   │   │   │   └── decrement
+│   │   │   │       └── route.ts
+│   │   │   ├── contact
+│   │   │   │   └── route.ts
+│   │   │   ├── products
+│   │   │   │   ├── route.ts
+│   │   │   │   └── [slug]
+│   │   │   │       └── route.ts
+│   │   │   └── upload
+│   │   │       └── route.ts
+│   │   ├── blog
+│   │   │   ├── head.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── [slug]
+│   │   │       ├── head.tsx
+│   │   │       └── page.tsx
+│   │   ├── cart
+│   │   │   └── page.tsx
+│   │   ├── checkout
+│   │   │   └── page.tsx
+│   │   ├── contact
+│   │   │   ├── head.tsx
+│   │   │   └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── products
+│   │   │   ├── head.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── [slug]
+│   │   │       ├── head.tsx
+│   │   │       └── page.tsx
+│   │   ├── robots.txt
+│   │   │   └── route.ts
+│   │   ├── sitemap.xml
+│   │   │   └── route.ts
+│   │   └── theme.css
+│   ├── components
+│   │   ├── AdminAuthGuard.tsx
+│   │   ├── Canonical.tsx
+│   │   ├── Footer.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ProductCard.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── lib
+│   │   └── prisma.ts
+│   └── scripts
+│       └── seed.ts
+├── tailwind.config.js
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
+
+46 directories, 84 files

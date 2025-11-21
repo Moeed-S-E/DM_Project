@@ -1,6 +1,3 @@
-// Prisma schema for MHMmobiles e-commerce
-// MySQL database
-
 generator client {
   provider = "prisma-client-js"
 }
