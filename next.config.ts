@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  // Ensure Turbopack resolves the correct workspace root when multiple lockfiles exist
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
   compress: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,

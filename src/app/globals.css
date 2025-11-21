@@ -38,3 +38,38 @@ html:not(.dark) input::placeholder,
 html:not(.dark) textarea::placeholder {
   color: var(--text-muted);
 }
+
+/* Custom colored scrollbar for elements using .custom-scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-blue) var(--card-bg);
+}
+
+/* WebKit browsers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--card-bg);
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-blue), #1e40af);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  filter: brightness(0.9);
+}
+
+/* Hide the native resize handle / resizer corner in WebKit */
+.custom-scrollbar::-webkit-resizer {
+  display: none !important;
+}
+
+/* Fallback: hide resize handle for textarea on all browsers */
+textarea.resize-none {
+  resize: none !important;
+}
