@@ -48,18 +48,21 @@ export default function BlogPage() {
                   <article className="bg-[var(--card-bg)] rounded-lg shadow-md hover:shadow-xl transition overflow-hidden h-full flex flex-col cursor-pointer group">
                     <div className="relative w-full aspect-video bg-[var(--level1-bg)] overflow-hidden">
                       {blog.coverImage ? (
-                        blog.coverImage ? (
-                          <Image
-                            src={blog.coverImage.startsWith('http') ? blog.coverImage : `/blog/${blog.coverImage}`}
-                            alt={alt}
-                            width={600}
-                            height={340}
-                            loading="lazy"
-                            className="w-full h-full object-cover group-hover:scale-105 transition"
-                            // If the image is external, skip Next's optimization to avoid proxy timeouts in dev
-                            unoptimized={blog.coverImage.startsWith('http')}
-                          />
-                        ) : null
+                        <Image
+                          src={blog.coverImage.startsWith('http') ? blog.coverImage : `/blog/${blog.coverImage}`}
+                          alt={alt}
+                          width={600}
+                          height={340}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition"
+                          // If the image is external, skip Next's optimization to avoid proxy timeouts in dev
+                          unoptimized={blog.coverImage.startsWith('http')}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-[var(--level1-bg)] to-[var(--level1-border)] flex items-center justify-center">
+                          <span className="text-[var(--text-muted)]">No image</span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
                       <h2 className="text-lg md:text-xl font-semibold text-[var(--text-color)] mb-2 line-clamp-2 group-hover:text-[var(--primary-blue)] transition">
