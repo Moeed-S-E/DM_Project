@@ -59,7 +59,7 @@ export default function BlogPage() {
                             // If the image is external, skip Next's optimization to avoid proxy timeouts in dev
                             unoptimized={blog.coverImage.startsWith('http')}
                           />
-                        ) : null}
+                        ) : null
                     </div>
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
                       <h2 className="text-lg md:text-xl font-semibold text-[var(--text-color)] mb-2 line-clamp-2 group-hover:text-[var(--primary-blue)] transition">
