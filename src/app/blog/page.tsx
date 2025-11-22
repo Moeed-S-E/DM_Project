@@ -48,7 +48,7 @@ export default function BlogPage() {
                   <article className="bg-[var(--card-bg)] rounded-lg shadow-md hover:shadow-xl transition overflow-hidden h-full flex flex-col cursor-pointer group">
                     <div className="relative w-full aspect-video bg-[var(--level1-bg)] overflow-hidden">
                       {blog.coverImage ? (
-                        {blog.coverImage ? (
+                        blog.coverImage ? (
                           <Image
                             src={blog.coverImage.startsWith('http') ? blog.coverImage : `/blog/${blog.coverImage}`}
                             alt={alt}
