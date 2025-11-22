@@ -4,14 +4,10 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-black">
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster="/logo.webp"
+      {/* Parallax background */}
+      <div
+        className="absolute inset-0 w-full h-full bg-fixed bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('/parallax-bg.jpg')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-primary-blue/60 z-10" />
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-4">

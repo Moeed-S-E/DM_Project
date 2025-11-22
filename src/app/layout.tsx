@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_PK",
-    url: "https://mhmmobiles.com",
+    url: "https://mhmmobiles.vercel.app",
     siteName: "MHMmobiles",
     title: "MHMmobiles | Premium Mobiles & Accessories",
     description: "Shop premium mobiles and accessories at the best prices in Pakistan.",

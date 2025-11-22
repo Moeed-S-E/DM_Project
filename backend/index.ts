@@ -15,7 +15,17 @@ const uploadProducts = multer({ dest: path.join(__dirname, '../public/products')
 const uploadBlog = multer({ dest: path.join(__dirname, '../public/blog') });
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://mhmmobiles.vercel.app',
+  ],
+  credentials: true
+}));
+// Warm-up endpoint for Render
+app.get('/ping', (req, res) => {
+  res.status(200).json({ ok: true, message: 'pong' });
+});
 app.use(express.json());
 
 // Admin login

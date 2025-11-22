@@ -1,5 +1,7 @@
+
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { getRedis, setRedis } from "@/lib/redis";
 
 export async function GET(
   request: NextRequest,
@@ -7,17 +9,22 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
-    const blog = await prisma.blog.findUnique({
-      where: { slug },
-    });
-
+    const cacheKey = `blog:${slug}`;
+    let blog = await getRedis(cacheKey);
+    if (!blog) {
+      blog = await prisma.blog.findUnique({
+        where: { slug },
+      });
+      if (blog) {
+        await setRedis(cacheKey, blog, 300); // cache for 5 min
+      }
+    }
     if (!blog) {
       return NextResponse.json(
         { error: "Blog not found" },
         { status: 404 }
       );
     }
-
     return NextResponse.json(blog);
   } catch (error) {
     console.error("Error fetching blog:", error);

@@ -1,7 +1,4 @@
-
-
-import Image from "next/image";
-// import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSection";
 
 export const metadata = {
   title: "MHMmobiles | Premium Mobiles & Accessories",
@@ -9,7 +6,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mhmmobiles.com",
+    url: "https://mhmmobiles.vercel.app",
     site_name: "MHMmobiles",
     title: "MHMmobiles | Premium Mobiles & Accessories",
     description: "MHMmobiles — Pakistan's trusted store for premium mobiles, smartphones and accessories. Find the best prices on Samsung, iPhone, Redmi, Vivo, Infinix and Tecno with fast delivery, genuine products, easy returns, and responsive support."
@@ -23,7 +20,7 @@ export const metadata = {
 };
 
 export default function Home() {
-  const base = process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.com";
+  const base = process.env.NEXT_PUBLIC_METADATA_BASE || "https://mhmmobiles.vercel.app";
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -58,27 +55,16 @@ export default function Home() {
       />
       {/* Hero Section */}
       <section className="relative w-full min-h-screen sm:min-h-[600px] md:h-[70vh] flex items-center justify-center overflow-hidden bg-black">
-        {/* Desktop video */}
-        <video 
-          className="hidden md:block absolute inset-0 w-full h-full object-cover z-0" 
-          src="/hero.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          poster="/logo.webp"
+        <div
+          className="absolute inset-0 w-full h-full bg-fixed bg-cover bg-center z-0"
         />
-        {/* Mobile fallback - gradient background */}
-        <div className="md:hidden absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-blue-700 to-black z-0" />
-        
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-blue-900/70 z-10" />
-        
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-blue-900/70 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16 md:py-0">
           <img 
             alt="MHMmobiles brand logo" 
             width={100} 
             height={100} 
-            className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32" 
+            className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
             src="/logo.webp" 
           />
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
