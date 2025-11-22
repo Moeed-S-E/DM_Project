@@ -36,13 +36,15 @@ export default function BlogDetailPage() {
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-8 bg-[var(--bg-color)] text-[var(--text-color)]">
-      <Image
-        src={blogImageSrc}
-        alt={alt}
-        width={800}
-        height={400}
-        className="rounded-lg object-cover mb-6 shadow-lg border border-[var(--level1-border)]"
-      />
+      {blog.coverImage ? (
+        <Image
+          src={blogImageSrc}
+          alt={alt}
+          width={800}
+          height={400}
+          className="rounded-lg object-cover mb-6 shadow-lg border border-[var(--level1-border)]"
+        />
+      ) : null}
       <h1 className="text-3xl font-bold mb-2 text-[var(--primary-blue)]">{blog.title}</h1>
       <p className="text-[var(--text-muted)] mb-4">{new Date(blog.createdAt).toLocaleDateString()}</p>
       <article className="prose prose-lg text-[var(--text-secondary)] max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
