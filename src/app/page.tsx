@@ -58,7 +58,7 @@ export default function Home() {
         <div
           className="absolute inset-0 w-full h-full bg-fixed bg-cover bg-center z-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-blue-900/70 z-10" />
+        <div className="absolute inset-0 bg-[var(--level1-bg)] z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16 md:py-0">
           <img 
             alt="MHMmobiles brand logo" 
@@ -67,22 +67,22 @@ export default function Home() {
             className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
             src="/logo.webp" 
           />
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
             MHMmobiles
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-zinc-100 mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
+          <p className="text-[var(--text-primary)] text-sm sm:text-base md:text-lg lg:text-2xl mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
             Premium Mobiles and Accessories at the Best Prices, Made Easy for Everyone
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto">
             <a 
               href="/products" 
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-white text-[var(--primary-blue)] font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--primary-blue)] !text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
             >
               Shop Now
             </a>
             <a 
               href="/products" 
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-white text-[var(--primary-blue)] font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--primary-blue)] !text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
             >
               Explore Accessories
             </a>

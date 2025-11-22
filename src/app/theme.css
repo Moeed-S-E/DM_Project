@@ -2,9 +2,9 @@
     --primary-blue: #4F46E5;
     --secondary-teal: #14B8A6;
     --accent-coral: #FB7185;
-    --base-white: #FFFFFF;
+    --base-white: #FFFFFF; /* Used as background in dark mode for HeroSection */
     --soft-gray: #F8FAFC;
-    --light-blue: #EFF6FF;
+    --light-blue: #EFF6FF; /* Used as background in light mode for HeroSection */
     --subtle-lavender: #F5F3FF;
 
     --level1-bg: #DBEAFE;
@@ -49,9 +49,9 @@
 }
 
 html.dark {
-    --base-white: #0F172A;
+    --base-white: #0F172A; /* Used as background in dark mode for HeroSection */
     --soft-gray: #1E293B;
-    --light-blue: #1E3A5F;
+    --light-blue: #1E3A5F; /* Used as background in light mode for HeroSection */
     --subtle-lavender: #2D2440;
     --text-primary: #F1F5F9;
     --text-secondary: #CBD5E1;
