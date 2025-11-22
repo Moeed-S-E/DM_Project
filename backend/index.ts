@@ -117,7 +117,20 @@ app.post('/api/upload/blog', auth, uploadBlog.single('image'), (req: Request, re
 });
 
 // Contact form
+app.options('/api/contact', (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': 'https://mhmmobiles.vercel.app',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
+  res.sendStatus(200);
+});
 app.post('/api/contact', async (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': 'https://mhmmobiles.vercel.app',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
   const { name, email, message } = req.body;
   // Configure your SMTP transport here
   const transporter = nodemailer.createTransport({
