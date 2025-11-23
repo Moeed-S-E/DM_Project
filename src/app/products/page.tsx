@@ -1,7 +1,9 @@
+
 "use client";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -45,6 +47,10 @@ export default function ProductsPage() {
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products' },
+      ]} />
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">

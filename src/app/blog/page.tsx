@@ -1,7 +1,9 @@
+
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -23,6 +25,10 @@ export default function BlogPage() {
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog' },
+      ]} />
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-12">

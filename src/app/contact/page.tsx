@@ -1,4 +1,6 @@
+
 "use client";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useState, useEffect } from "react";
 
 export default function ContactPage() {
@@ -44,6 +46,10 @@ export default function ContactPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-12">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Contact', href: '/contact' },
+      ]} />
       <h1 className="text-3xl font-bold mb-6 text-text-primary">Contact Us</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">

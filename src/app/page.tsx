@@ -1,6 +1,7 @@
 
 import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
   title: "MHMmobiles | Premium Mobiles & Accessories",
@@ -51,6 +52,9 @@ export default function Home() {
   };
   return (
     <div className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] font-sans">
+      <div className="max-w-6xl mx-auto px-4 pt-6">
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }]} />
+      </div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
