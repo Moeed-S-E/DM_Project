@@ -9,12 +9,13 @@ export default function HeroSection() {
         />
         <div className="absolute inset-0 bg-[var(--level1-bg)] z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16 md:py-0">
-          <img 
-            alt="MHMmobiles brand logo" 
-            width={100} 
-            height={100} 
+          <Image
+            alt="MHMmobiles brand logo"
+            width={100}
+            height={100}
             className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
-            src="/logo.webp" 
+            src="/logo.webp"
+            priority
           />
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
             MHMmobiles

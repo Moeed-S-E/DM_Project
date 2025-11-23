@@ -22,6 +22,20 @@ app.use(cors({
   ],
   credentials: true
 }));
+// Security headers middleware
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://mhmmobiles.vercel.app; script-src 'self'; style-src 'self' 'unsafe-inline';");
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=()');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Origin-Agent-Cluster', '?1');
+  // Trusted Types header for supported browsers
+  res.setHeader('Trusted-Types', 'default');
+  next();
+});
 // Warm-up endpoint for Render
 app.get('/ping', (req, res) => {
   res.status(200).json({ ok: true, message: 'pong' });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import AdminAuthGuard from "@/components/AdminAuthGuard";
 
@@ -106,7 +107,16 @@ export default function EditBlogPage() {
           </label>
           <label className="block font-semibold">Cover Image
             <input type="file" accept="image/*" className="w-full p-2 border rounded mt-1" ref={fileInputRef} onChange={handleImageChange} />
-            {imagePreview && <img src={imagePreview} alt="Preview" className="mt-2 max-h-32 rounded" />}
+            {imagePreview && (
+              <Image
+                src={imagePreview}
+                alt="Preview"
+                width={128}
+                height={128}
+                className="mt-2 max-h-32 rounded"
+                unoptimized
+              />
+            )}
             <input className="w-full p-2 border rounded mt-1" value={post.coverImage || ""} readOnly />
           </label>
           <label className="block font-semibold">Content

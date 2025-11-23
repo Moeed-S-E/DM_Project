@@ -88,7 +88,8 @@ export default function ProductsPage() {
           <div className="flex items-end">
             <Link
               href="/cart"
-              className="w-full px-3 sm:px-4 py-2 bg-[var(--accent-coral)] text-white rounded-lg font-semibold hover:opacity-90 transition text-center text-xs sm:text-sm"
+              className="w-full px-5 sm:px-7 py-3 bg-[var(--accent-coral)] text-white rounded-lg font-semibold hover:opacity-90 transition text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-coral)]"
+              aria-label="View shopping cart"
             >
               View Cart
             </Link>
@@ -108,7 +109,8 @@ export default function ProductsPage() {
                 setCategory("");
                 setSort("newest");
               }}
-              className="px-4 sm:px-6 py-2 bg-[var(--primary-blue)] text-white rounded-lg hover:opacity-90 transition text-xs sm:text-sm font-semibold"
+              className="px-5 sm:px-7 py-3 bg-[var(--primary-blue)] text-white rounded-lg hover:opacity-90 transition text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
+              aria-label="Clear all filters and show all products"
             >
               Clear Filters
             </button>

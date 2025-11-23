@@ -1,3 +1,5 @@
+
+import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 
 export const metadata = {
@@ -60,12 +62,13 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[var(--level1-bg)] z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16 md:py-0">
-          <img 
-            alt="MHMmobiles brand logo" 
-            width={100} 
-            height={100} 
+          <Image
+            alt="MHMmobiles brand logo"
+            width={100}
+            height={100}
             className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
-            src="/logo.webp" 
+            src="/logo.webp"
+            priority
           />
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
             MHMmobiles
@@ -130,16 +133,16 @@ export default function Home() {
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--primary-blue)]">Trusted Brands</h2>
         <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 items-center">
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/samsung.svg" alt="Samsung" loading="lazy" className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/samsung.svg" alt="Samsung brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apple.svg" alt="Apple" loading="lazy" className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apple.svg" alt="Apple brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/xiaomi.svg" alt="Redmi by Xiaomi" loading="lazy" className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/xiaomi.svg" alt="Redmi by Xiaomi brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vivo.svg" alt="Vivo" loading="lazy" className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vivo.svg" alt="Vivo brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
           </div>
         </div>
       </section>
@@ -175,7 +178,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-8 text-center text-[var(--text-muted)] text-sm">
         <div className="h-card inline-flex items-center justify-center gap-3 mb-3">
-          <img src="/logo.webp" alt="MHMmobiles logo" className="u-logo w-8 h-8 rounded" />
+          <Image src="/logo.webp" alt="MHMmobiles logo" width={32} height={32} className="u-logo w-8 h-8 rounded" />
           <div>
             <div className="p-name font-semibold text-[var(--text-color)]">MHMmobiles</div>
             <a className="u-url text-xs text-[var(--text-muted)]" href={base}>{base.replace(/^https?:\/\//, '')}</a>
