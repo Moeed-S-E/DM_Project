@@ -113,35 +113,9 @@ async function main() {
     ],
   });
 
-  // Create blogs
-  const blogs = await prisma.blog.createMany({
-    data: [
-      {
-        title: "Latest Smartphone Trends 2024",
-        slug: "latest-smartphone-trends-2024",
-        content:
-          "<h2>AI-Powered Cameras</h2><p>Modern smartphones now feature advanced AI chips dedicated to photography...</p><h2>Battery Innovation</h2><p>New fast-charging technologies are pushing limits...</p>",
-        coverImage: "logo.webp",
-      },
-      {
-        title: "How to Choose the Right Laptop",
-        slug: "how-to-choose-right-laptop",
-        content:
-          "<h2>Processing Power</h2><p>Consider your workflow requirements...</p><h2>Display Quality</h2><p>Resolution and refresh rates matter for productivity...</p>",
-        coverImage: "logo.webp",
-      },
-      {
-        title: "Wireless Technology Explained",
-        slug: "wireless-technology-explained",
-        content:
-          "<h2>Bluetooth Evolution</h2><p>From Bluetooth 4.0 to 5.4, learn the improvements...</p><h2>WiFi 6E</h2><p>The next generation of wireless networking...</p>",
-        coverImage: "logo.webp",
-      },
-    ],
-  });
+
 
   console.log(`✓ Seeded ${products.count} products`);
-  console.log(`✓ Seeded ${blogs.count} blogs`);
 }
 
 main()
