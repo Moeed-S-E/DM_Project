@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 export default function BlogDetailPage() {
   const params = useParams();
-  const [blog, setBlog] = useState<any>(null);
+  const [blog, setBlog] = useState<any | undefined>(undefined);
 
   useEffect(() => {
     if (params?.slug) {
@@ -19,8 +19,22 @@ export default function BlogDetailPage() {
     }
   }, [params?.slug]);
 
+  if (blog === undefined) {
+    return (
+      <main className="max-w-3xl mx-auto px-4 py-8 bg-[var(--bg-color)] text-[var(--text-color)]">
+        <div className="w-full h-56 bg-[var(--level1-bg)] rounded-lg mb-6 animate-pulse" />
+        <div className="h-8 w-3/4 bg-[var(--level1-bg)] rounded mb-4 animate-pulse" />
+        <div className="h-4 w-1/2 bg-[var(--level1-bg)] rounded mb-2 animate-pulse" />
+        <div className="space-y-3 mt-6">
+          <div className="h-4 bg-[var(--level1-bg)] rounded w-full animate-pulse" />
+          <div className="h-4 bg-[var(--level1-bg)] rounded w-11/12 animate-pulse" />
+          <div className="h-4 bg-[var(--level1-bg)] rounded w-10/12 animate-pulse" />
+        </div>
+      </main>
+    );
+  }
+
   if (blog === null) return <div className="p-8 text-center text-red-500">Blog post not found.</div>;
-  if (!blog) return <div className="p-8">Loading...</div>;
 
   let alt = `Cover image for blog post: ${blog.title} — MHMmobiles Blog`;
   if (blog.coverImage && blog.coverImage.match) {

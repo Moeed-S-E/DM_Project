@@ -38,8 +38,15 @@ export default function BlogPage() {
 
         {/* Blog Grid */}
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <p className="text-[var(--text-muted)]">Loading blog posts...</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <article key={i} className="bg-[var(--card-bg)] rounded-lg overflow-hidden p-4 animate-pulse h-64">
+                <div className="w-full h-36 bg-[var(--level1-bg)] rounded mb-4" />
+                <div className="h-4 bg-[var(--level1-bg)] rounded w-3/4 mb-2" />
+                <div className="h-3 bg-[var(--level1-bg)] rounded w-1/2 mb-2" />
+                <div className="mt-auto h-3 bg-[var(--level1-bg)] rounded w-1/4" />
+              </article>
+            ))}
           </div>
         ) : blogs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">

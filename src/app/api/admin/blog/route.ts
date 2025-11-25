@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { delRedis } from "@/lib/redis";
 
 export async function GET(request: NextRequest) {
   try {
@@ -27,6 +28,13 @@ export async function POST(request: NextRequest) {
         coverImage: coverImage || "",
       },
     });
+
+    // invalidate blogs list cache
+    try {
+      await delRedis("blogs:list");
+    } catch (err) {
+      console.error("Failed to invalidate blogs:list cache", err);
+    }
 
     return NextResponse.json(blog);
   } catch (error) {

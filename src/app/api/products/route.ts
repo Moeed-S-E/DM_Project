@@ -21,9 +21,15 @@ export async function GET(request: NextRequest) {
         },
         orderBy: { createdAt: "desc" },
       });
-      await setRedis(cacheKey, products, 300); // cache for 5 min
+      // cache in redis for 7 days (in seconds)
+      await setRedis(cacheKey, products, 60 * 60 * 24 * 7);
     }
-    return NextResponse.json(products);
+    return NextResponse.json(products, {
+      headers: {
+        // allow CDN and browser to cache for 7 days
+        "Cache-Control": "public, max-age=604800, s-maxage=604800, stale-while-revalidate=3600",
+      },
+    });
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.json(

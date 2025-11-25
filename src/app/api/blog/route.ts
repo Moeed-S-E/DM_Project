@@ -19,9 +19,14 @@ export async function GET(request: NextRequest) {
         },
         orderBy: { createdAt: "desc" },
       });
-      await setRedis(cacheKey, blogs, 300); // cache for 5 min
+      // cache in redis for 7 days
+      await setRedis(cacheKey, blogs, 60 * 60 * 24 * 7);
     }
-    return NextResponse.json(blogs);
+    return NextResponse.json(blogs, {
+      headers: {
+        "Cache-Control": "public, max-age=604800, s-maxage=604800, stale-while-revalidate=3600",
+      },
+    });
   } catch (error) {
     console.error("Error fetching blogs:", error);
     return NextResponse.json(

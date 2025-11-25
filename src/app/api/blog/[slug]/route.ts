@@ -16,7 +16,8 @@ export async function GET(
         where: { slug },
       });
       if (blog) {
-        await setRedis(cacheKey, blog, 300); // cache for 5 min
+        // cache in redis for 7 days
+        await setRedis(cacheKey, blog, 60 * 60 * 24 * 7);
       }
     }
     if (!blog) {
@@ -25,7 +26,11 @@ export async function GET(
         { status: 404 }
       );
     }
-    return NextResponse.json(blog);
+    return NextResponse.json(blog, {
+      headers: {
+        "Cache-Control": "public, max-age=604800, s-maxage=604800, stale-while-revalidate=3600",
+      },
+    });
   } catch (error) {
     console.error("Error fetching blog:", error);
     return NextResponse.json(

@@ -69,9 +69,35 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-lg">Loading product...</p>
+      <main className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="flex items-center justify-center bg-[var(--card-bg)] rounded-lg p-4 md:p-8">
+              <div className="w-full aspect-square bg-[var(--level1-bg)] rounded-lg animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <div className="mb-6">
+                <div className="h-8 w-3/4 bg-[var(--level1-bg)] rounded mb-3 animate-pulse" />
+                <div className="h-4 w-1/3 bg-[var(--level1-bg)] rounded animate-pulse" />
+              </div>
+
+              <div className="mb-6 pb-6 border-b border-[var(--level1-border)]">
+                <div className="h-6 w-1/2 bg-[var(--level1-bg)] rounded mb-4 animate-pulse" />
+                <div className="h-4 w-1/4 bg-[var(--level1-bg)] rounded animate-pulse" />
+              </div>
+
+              <div className="mb-6">
+                <div className="h-4 bg-[var(--level1-bg)] rounded w-full mb-2 animate-pulse" />
+                <div className="h-4 bg-[var(--level1-bg)] rounded w-5/6 mb-2 animate-pulse" />
+                <div className="h-4 bg-[var(--level1-bg)] rounded w-2/3 mb-2 animate-pulse" />
+              </div>
+
+              <div className="mb-6 space-y-4">
+                <div className="h-10 bg-[var(--level1-bg)] rounded w-40 animate-pulse" />
+                <div className="h-12 bg-[var(--level1-bg)] rounded w-full animate-pulse" />
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     );

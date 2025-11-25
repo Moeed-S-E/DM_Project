@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { delRedis } from "@/lib/redis";
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,6 +32,13 @@ export async function POST(request: NextRequest) {
         category: category || "",
       },
     });
+
+    // invalidate list cache so next request fetches fresh data
+    try {
+      await delRedis("products:list");
+    } catch (err) {
+      console.error("Failed to invalidate products:list cache", err);
+    }
 
     return NextResponse.json(product);
   } catch (error) {
