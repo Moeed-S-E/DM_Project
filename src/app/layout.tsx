@@ -137,6 +137,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.className} ${poppins.variable} antialiased`}
       >
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -149,7 +150,7 @@ export default function RootLayout({
           }}
         />
         <Navbar />
-        <div className="min-h-[80vh] flex flex-col">
+        <div id="content" className="min-h-[80vh] flex flex-col">
           {children}
         </div>
         

@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import HeroSection from "@/components/HeroSection";
+import HeroLoader from "@/components/HeroLoader.client";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
@@ -59,8 +59,8 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      {/* Hero Section */}
-     <HeroSection/>   
+        {/* Hero Section */}
+           <HeroLoader />
       {/* About Section - added to increase visible text content for SEO */}
       <section className="max-w-4xl mx-auto py-12 sm:py-16 lg:py-20 px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[var(--primary-blue)]">About MHMmobiles</h2>
@@ -101,16 +101,25 @@ export default function Home() {
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--primary-blue)]">Trusted Brands</h2>
         <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 items-center">
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
+            <a href="https://www.samsung.com/pk/">
             <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/samsung.svg" alt="Samsung brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            </a>
+
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
+            <a href="https://www.apple.com/">
             <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apple.svg" alt="Apple brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            </a>
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
+            <a href="https://www.mi.com/pk">
             <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/xiaomi.svg" alt="Redmi by Xiaomi brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+            </a>
           </div>
           <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-white/10 shadow-md hover:shadow-lg transition">
+          <a href="https://www.vivo.com/pk">
             <Image src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vivo.svg" alt="Vivo brand logo" width={48} height={48} className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 filter dark:invert" />
+          </a>
           </div>
         </div>
       </section>

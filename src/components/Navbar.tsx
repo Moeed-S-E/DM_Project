@@ -2,7 +2,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
+import dynamic from 'next/dynamic';
+
+// Theme toggle is interactive but small — load it on client only to avoid adding it to initial bundle
+const ThemeToggle = dynamic(() => import('./ThemeToggle'), { ssr: false });
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
