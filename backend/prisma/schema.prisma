@@ -31,7 +31,7 @@ model Blog {
 
 model Admin {
   id           Int    @id @default(autoincrement())
-  username     String @unique
+  username     String
   passwordHash String
 }
 

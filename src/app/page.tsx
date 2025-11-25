@@ -60,43 +60,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen sm:min-h-[600px] md:h-[70vh] flex items-center justify-center overflow-hidden bg-black">
-        <div
-          className="absolute inset-0 w-full h-full bg-fixed bg-cover bg-center z-0"
-        />
-        <div className="absolute inset-0 bg-[var(--level1-bg)] z-10" />
-        <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16 md:py-0">
-          <Image
-            alt="MHMmobiles brand logo"
-            width={100}
-            height={100}
-            className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
-            src="/logo.webp"
-            priority
-          />
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
-            MHMmobiles
-          </h1>
-          <p className="text-[var(--text-primary)] text-sm sm:text-base md:text-lg lg:text-2xl mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
-            Premium Mobiles and Accessories at the Best Prices, Made Easy for Everyone
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto">
-            <a 
-              href="/products" 
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--primary-blue)] !text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
-            >
-              Shop Now
-            </a>
-            <a 
-              href="/products" 
-              className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-[var(--primary-blue)] !text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition transform text-sm sm:text-base md:text-lg whitespace-nowrap"
-            >
-              Explore Accessories
-            </a>
-          </div>
-        </div>
-      </section>
-
+     <HeroSection/>   
       {/* About Section - added to increase visible text content for SEO */}
       <section className="max-w-4xl mx-auto py-12 sm:py-16 lg:py-20 px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[var(--primary-blue)]">About MHMmobiles</h2>
@@ -178,18 +142,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 text-center text-[var(--text-muted)] text-sm">
-        <div className="h-card inline-flex items-center justify-center gap-3 mb-3">
-          <Image src="/logo.webp" alt="MHMmobiles logo" width={32} height={32} className="u-logo w-8 h-8 rounded" />
-          <div>
-            <div className="p-name font-semibold text-[var(--text-color)]">MHMmobiles</div>
-            <a className="u-url text-xs text-[var(--text-muted)]" href={base}>{base.replace(/^https?:\/\//, '')}</a>
-          </div>
-        </div>
-        &copy; {new Date().getFullYear()} MHMmobiles. All rights reserved.
-      </footer>
     </div>
   );
 }
