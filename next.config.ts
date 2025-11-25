@@ -61,6 +61,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Long cache for any SVGs served from the app/public root
+      {
+        source: '/:path*.svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
       // Cache static Next assets more aggressively
       {
         source: '/_next/static/:all*',

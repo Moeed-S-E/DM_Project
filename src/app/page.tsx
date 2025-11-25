@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import HeroLoader from "@/components/HeroLoader.client";
+import HeroSection from "@/components/HeroSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
@@ -59,8 +59,8 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-        {/* Hero Section */}
-           <HeroLoader />
+          {/* Hero Section */}
+            <HeroSection />
       {/* About Section - added to increase visible text content for SEO */}
       <section className="max-w-4xl mx-auto py-12 sm:py-16 lg:py-20 px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[var(--primary-blue)]">About MHMmobiles</h2>

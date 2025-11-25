@@ -1,6 +1,4 @@
-"use client";
 import Image from "next/image";
-import TypingText from "./TypingText";
 
 export default function HeroSection() {
   return (
@@ -24,10 +22,7 @@ export default function HeroSection() {
             MHMmobiles
           </h1>
                     <p className="text-[var(--text-primary)] text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
-            <TypingText
-              text="Premium Mobiles and Accessories at the Best Prices, Made Easy for Everyone"
-              speed={30}
-            />
+            Premium Mobiles and Accessories at the Best Prices, Made Easy for Everyone
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto">
             <a 

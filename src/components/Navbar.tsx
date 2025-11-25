@@ -14,7 +14,7 @@ export default function Navbar() {
     <nav className="bg-[var(--card-bg)] border-b shadow-sm">
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-          <Image src="/logo.webp" alt="MHMmobiles" width={40} height={40} priority style={{ width: 'auto', height: 'auto' }} />
+          <Image src="/logo.webp" alt="MHMmobiles" width={40} height={40} style={{ width: 'auto', height: 'auto' }} />
           <span className="text-base md:text-lg font-bold text-[var(--primary-blue)]">MHMmobiles</span>
         </Link>
         {/* Desktop Menu */}
