@@ -27,18 +27,21 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center border-0 outline-none focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          <span className={`h-0.5 w-full bg-[var(--primary-blue)] transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-          <span className={`h-0.5 w-full bg-[var(--primary-blue)] transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`h-0.5 w-full bg-[var(--primary-blue)] transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          <span aria-hidden="true" className={`h-0.5 w-full bg-[var(--primary-blue)] transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span aria-hidden="true" className={`h-0.5 w-full bg-[var(--primary-blue)] transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
+          <span aria-hidden="true" className={`h-0.5 w-full bg-[var(--primary-blue)] transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
         </button>
       </div>
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[var(--card-bg)] border-t flex flex-col gap-2 p-4">
+        <div id="mobile-menu" className="md:hidden bg-[var(--card-bg)] border-t flex flex-col gap-2 p-4">
           <Link href="/products" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>Products</Link>
           <Link href="/blog" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>Blog</Link>
           <Link href="/about" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>About</Link>

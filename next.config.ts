@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      // Default short cache for HTML pages and other misc paths
       {
         source: '/:path*',
         headers: [
@@ -50,8 +51,28 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Long cache for the site logo (immutable)
       {
-        source: '/public/:all*',
+        source: '/logo.webp',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache static Next assets more aggressively
+      {
+        source: '/_next/static/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/image/:all*',
         headers: [
           {
             key: 'Cache-Control',

@@ -15,6 +15,8 @@ export default function HeroSection() {
             width={100}
             height={100}
             className="mx-auto mb-3 sm:mb-4 drop-shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32"
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 640px) 5rem, (max-width: 1024px) 6rem, 8rem"
             src="/logo.webp"
             priority
           />
