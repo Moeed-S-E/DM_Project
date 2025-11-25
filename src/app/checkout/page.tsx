@@ -194,15 +194,24 @@ export default function Checkout() {
               <div className="space-y-4">
                 {cart.map(item => (
                   <div key={item.id} className="flex gap-4 pb-4 border-b border-[var(--level1-border)] last:border-b-0">
-                    <div className="w-20 h-20 flex-shrink-0">
-                      <Image
-                        src={`/${item.image}`}
-                        alt={item.title}
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
+                        <div className="w-20 h-20 flex-shrink-0">
+                          {(() => {
+                            const src = item.image?.startsWith('http')
+                              ? item.image
+                              : item.image?.startsWith('/')
+                              ? item.image
+                              : `/products/${item.image}`;
+                            return (
+                              <Image
+                                src={src}
+                                alt={item.title}
+                                width={80}
+                                height={80}
+                                className="w-full h-full object-cover rounded-lg"
+                              />
+                            );
+                          })()}
+                        </div>
                     <div className="flex-1">
                       <h3 className="font-semibold">{item.title}</h3>
                       <p className="text-sm text-[var(--text-muted)]">Qty: {item.quantity}</p>
