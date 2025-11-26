@@ -6,7 +6,14 @@ import { getRedis, setRedis } from "@/lib/redis";
 export async function GET(request: NextRequest) {
   try {
     const cacheKey = "blogs:list";
-    let blogs = await getRedis(cacheKey);
+    const url = new URL(request.url);
+    const refresh = url.searchParams.get("refresh") || url.searchParams.get("r");
+
+    // If refresh flag is provided, bypass cache and fetch fresh data
+    let blogs = null;
+    if (!refresh) {
+      blogs = await getRedis(cacheKey);
+    }
     if (!blogs) {
       blogs = await prisma.blog.findMany({
         select: {
@@ -19,8 +26,8 @@ export async function GET(request: NextRequest) {
         },
         orderBy: { createdAt: "desc" },
       });
-      // cache in redis for 7 days
-      await setRedis(cacheKey, blogs, 60 * 60 * 24 * 7);
+      // cache in redis for 1 day (reduce long-stale responses)
+      await setRedis(cacheKey, blogs, 60 * 60 * 24);
     }
     return NextResponse.json(blogs, {
       headers: {
