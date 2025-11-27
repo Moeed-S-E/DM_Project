@@ -63,8 +63,8 @@ export default function BlogDetailPage() {
           <Image
             src={blogImageSrc}
             alt={alt}
-            width={100}
-            height={90}
+            width={200}
+            height={180}
             priority
             quality={90}
             placeholder="empty"
@@ -84,9 +84,7 @@ export default function BlogDetailPage() {
       ) : null}
       <h1 className={`text-3xl font-bold mb-2 text-[var(--primary-blue)] ${blogImageSrc ? '' : 'mt-2'}`}>{blog.title}</h1>
       <p className="text-[var(--text-muted)] mb-4">{new Date(blog.createdAt).toLocaleDateString()}</p>
-      <article className="prose prose-lg blog-content text-[var(--text-secondary)] max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
+      <article className="prose prose-lg text-[var(--text-secondary)] max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
     </main>
   );
 }
-
-// AT5PAAIncDI1ZTU5ZThkY2RiYjE0YzEyYWU0YTg4MWJiZWVkZTE0NHAyMTU5NTE
