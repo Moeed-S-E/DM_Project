@@ -118,3 +118,44 @@ html:not(.dark) textarea::placeholder {
 textarea.resize-none {
   resize: none !important;
 }
+
+/* Blog content (admin-pasted HTML) custom styles */
+.prose.blog-content a {
+  display: inline-block;
+  max-width: 60ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: baseline;
+  color: var(--primary-blue);
+}
+.prose.blog-content h2,
+.prose.blog-content h3,
+.prose.blog-content h4 {
+  color: var(--primary-blue);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.prose.blog-content h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.prose.blog-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.prose.blog-content p {
+  margin-bottom: 0.9rem;
+}
+
+/* Ensure images inside admin HTML are responsive and get small lateral padding on mobile */
+@media (max-width: 640px) {
+  .prose.blog-content img {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .prose.blog-content a {
+    max-width: 40ch;
+  }
+}
