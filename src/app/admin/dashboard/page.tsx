@@ -13,3 +13,6 @@ export default function AdminDashboardPage() {
     </AdminAuthGuard>
   );
 }
+
+// curl -X POST "https://your-site.example.com/api/admin/flush-cache" \
+  // -H "x-admin-token: "

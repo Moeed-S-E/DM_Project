@@ -12,6 +12,51 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Make media elements responsive and avoid layout overflow */
+img, picture, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent long words/URLs from overflowing on small screens */
+p, ul, ol, li, a, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Add safe content padding for very small viewports */
+/* This ensures pages that forget to add container padding still look OK on phones */
+#content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Make Tailwind Typography (.prose) content responsive and prevent overflow */
+.prose img, .prose video, .prose iframe, .prose picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.prose table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose pre, .prose code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.prose a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 /* Ensure good text contrast in light theme */
 html:not(.dark) body {
   color: var(--text-primary);

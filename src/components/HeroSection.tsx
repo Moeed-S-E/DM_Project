@@ -21,7 +21,8 @@ export default function HeroSection() {
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-primary)] mb-2 sm:mb-3 drop-shadow-lg tracking-tight">
             MHMmobiles
           </h1>
-                    <p className="text-[var(--text-primary)] text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
+
+          <p className="text-[var(--text-primary)] text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
             Premium Mobiles and Accessories at the Best Prices, Made Easy for Everyone
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto">

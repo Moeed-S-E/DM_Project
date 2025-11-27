@@ -150,7 +150,7 @@ export default function RootLayout({
           }}
         />
         <Navbar />
-        <div id="content" className="min-h-[80vh] flex flex-col">
+        <div id="content" className="min-h-[80vh] flex flex-col px-4 sm:px-6 md:px-8">
           {children}
         </div>
         

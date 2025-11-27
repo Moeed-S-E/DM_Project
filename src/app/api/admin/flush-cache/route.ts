@@ -1,29 +1,35 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { delRedis } from "@/lib/redis";
 
-// Protected endpoint to flush specific caches. Requires a secret header.
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const secret = request.headers.get("x-cache-secret");
-    if (!secret || secret !== process.env.CACHE_SECRET) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const headerToken = request.headers.get("x-admin-token");
+    const url = new URL(request.url);
+    const queryToken = url.searchParams.get("token");
+
+    let bodyToken: string | undefined = undefined;
+    try {
+      const body = await request.json().catch(() => null);
+      if (body && typeof body.token === "string") bodyToken = body.token;
+    } catch (e) {}
+
+    const token = headerToken || bodyToken || queryToken || "";
+
+    const envToken = process.env.ADMIN_FLUSH_TOKEN || "";
+
+    // Allow 'root' token in non-production for convenience (matches local admin login)
+    const allowed = (process.env.NODE_ENV !== "production" && token === "root") || (envToken && token === envToken);
+
+    if (!allowed) {
+      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
     }
 
-    // invalidate common cache keys used by the app
-    const keys = ["blogs:list", "products:list"];
-    const results = [] as Array<{ key: string; result: any }>;
-    for (const k of keys) {
-      try {
-        const r = await delRedis(k);
-        results.push({ key: k, result: r });
-      } catch (err) {
-        results.push({ key: k, result: String(err) });
-      }
-    }
+    // Delete the known cache key(s)
+    await delRedis("blogs:list");
 
-    return NextResponse.json({ ok: true, results });
+    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("Error flushing cache", err);
-    return NextResponse.json({ error: "Failed to flush cache" }, { status: 500 });
+    console.error("flush-cache error", err);
+    return NextResponse.json({ error: "failed" }, { status: 500 });
   }
 }

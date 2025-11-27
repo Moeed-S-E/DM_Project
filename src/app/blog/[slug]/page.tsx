@@ -1,11 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
 export default function BlogDetailPage() {
   const params = useParams();
   const [blog, setBlog] = useState<any | undefined>(undefined);
+  const [imageBroken, setImageBroken] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [capWidth, setCapWidth] = useState<number | null>(null);
 
   useEffect(() => {
     if (params?.slug) {
@@ -42,24 +45,44 @@ export default function BlogDetailPage() {
     if (keywords) alt += ` — ${keywords.replace(/-/g, ' ')}`;
   }
 
-  const blogImageSrc = blog.coverImage?.startsWith('http')
-    ? blog.coverImage
-    : blog.coverImage?.startsWith('/')
-    ? blog.coverImage
-    : `/blog/${blog.coverImage}`;
+  // Treat obvious placeholder values as "no image"
+  const hasValidCover = blog.coverImage && typeof blog.coverImage === 'string' && blog.coverImage !== 'xyz' && blog.coverImage.trim() !== '';
+
+  const blogImageSrc = hasValidCover
+    ? blog.coverImage.startsWith('http')
+      ? blog.coverImage
+      : blog.coverImage.startsWith('/')
+      ? blog.coverImage
+      : `/blog/${blog.coverImage}`
+    : null;
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8 bg-[var(--bg-color)] text-[var(--text-color)]">
-      {blog.coverImage ? (
-        <Image
-          src={blogImageSrc}
-          alt={alt}
-          width={800}
-          height={400}
-          className="rounded-lg object-cover mb-6 shadow-lg border border-[var(--level1-border)]"
-        />
+    <main className="max-w-3xl mx-auto px-4 py-8 bg-[var(--bg-color)] text-[var(--text-color)] overflow-x-hidden">
+      {blogImageSrc && !imageBroken ? (
+        <div ref={wrapperRef} className="w-full mb-6">
+          <Image
+            src={blogImageSrc}
+            alt={alt}
+            width={100}
+            height={90}
+            priority
+            quality={90}
+            placeholder="empty"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
+            className="rounded-lg object-cover shadow-lg border border-[var(--level1-border)] w-full max-h-64 md:max-h-80 md:scale-90"
+            onLoadingComplete={(res) => {
+              try {
+                const natural = res?.naturalWidth || 0;
+                const container = wrapperRef.current?.clientWidth || 0;
+                if (natural && container && natural < container) setCapWidth(natural);
+              } catch (e) {}
+            }}
+            onError={() => setImageBroken(true)}
+            style={capWidth ? { maxWidth: `${capWidth}px`, marginLeft: "auto", marginRight: "auto" } : undefined}
+          />
+        </div>
       ) : null}
-      <h1 className="text-3xl font-bold mb-2 text-[var(--primary-blue)]">{blog.title}</h1>
+      <h1 className={`text-3xl font-bold mb-2 text-[var(--primary-blue)] ${blogImageSrc ? '' : 'mt-2'}`}>{blog.title}</h1>
       <p className="text-[var(--text-muted)] mb-4">{new Date(blog.createdAt).toLocaleDateString()}</p>
       <article className="prose prose-lg text-[var(--text-secondary)] max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
     </main>
