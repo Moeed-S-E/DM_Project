@@ -23,7 +23,6 @@ export default function Navbar() {
           <Link href="/blog" className="hover:text-[var(--primary-blue)]">Blog</Link>
           <Link href="/about" className="hover:text-[var(--primary-blue)]">About</Link>
           <Link href="/contact" className="hover:text-[var(--primary-blue)]">Contact</Link>
-          <Link href="/admin/login" className="text-[var(--primary-blue)] font-semibold">Admin</Link>
           <ThemeToggle />
         </div>
         {/* Mobile Menu Button */}
@@ -46,7 +45,6 @@ export default function Navbar() {
           <Link href="/blog" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>Blog</Link>
           <Link href="/about" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>About</Link>
           <Link href="/contact" className="py-2 px-3 hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>Contact</Link>
-          <Link href="/admin/login" className="py-2 px-3 text-[var(--primary-blue)] font-semibold hover:bg-[var(--level-1)] rounded" onClick={() => setMenuOpen(false)}>Admin</Link>
           <div className="py-2 px-3"><ThemeToggle /></div>
         </div>
       )}

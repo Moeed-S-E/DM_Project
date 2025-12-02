@@ -43,7 +43,7 @@ app.get('/ping', (req, res) => {
 app.use(express.json());
 
 // Admin login
-app.post('/api/admin/login', async (req, res) => {
+app.post('/api/admin/xadm', async (req, res) => {
   const { username, password } = req.body;
   const admin = await prisma.admin.findUnique({ where: { username } });
   if (!admin || !bcrypt.compareSync(password, admin.passwordHash)) {

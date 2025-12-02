@@ -12,24 +12,6 @@ export default function AdminLoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    // Simple local check for development — change to server auth in production
-    if (username === "root" && password === "root") {
-      // Cache auth for 2 minutes
-      try {
-        localStorage.setItem(
-          "adminAuth",
-          JSON.stringify({ token: "root", expiry: Date.now() + 2 * 60 * 1000 })
-        );
-      } catch (e) {
-        console.warn("Could not persist admin auth", e);
-      }
-
-      // Redirect to dashboard
-      router.push("/admin/dashboard");
-      return;
-    }
-
     alert("Invalid credentials");
     setLoading(false);
   };
