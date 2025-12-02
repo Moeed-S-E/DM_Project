@@ -42,4 +42,5 @@ next-env.d.ts
 
 node_modules/
 backend/node_modules/
+backend/scripts/create-admin.js
 fd.txt
