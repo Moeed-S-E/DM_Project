@@ -45,7 +45,7 @@ app.use(express.json());
 // Admin login
 app.post('/api/xdm/xadm', async (req, res) => {
   const { username, password } = req.body;
-  const admin = await prisma.admin.findUnique({ where: { username } });
+  const admin = await prisma.admin.findFirst({ where: { username } });
   if (!admin || !bcrypt.compareSync(password, admin.passwordHash)) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
