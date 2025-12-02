@@ -2,6 +2,7 @@
 "use client";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { useState, useEffect } from "react";
+import { apiBase } from '@/lib/apiBase';
 
 export default function ContactPage() {
   const [error, setError] = useState("");
@@ -25,7 +26,7 @@ export default function ContactPage() {
     setError("");
     setSending(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact`, {
+      const res = await fetch(`${apiBase()}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

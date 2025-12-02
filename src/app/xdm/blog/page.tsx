@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiBase } from '@/lib/apiBase';
 import Link from "next/link";
 import AdminAuthGuard from "@/components/AdminAuthGuard";
 
@@ -8,7 +9,7 @@ export default function AdminBlogPage() {
   const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/blog`)
+    fetch(`${apiBase()}/api/xdm/blog`)
       .then((r) => r.json())
       .then((data) => setPosts(data))
       .catch(console.error);
@@ -16,7 +17,7 @@ export default function AdminBlogPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this post?')) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/blog/${id}`, { method: 'DELETE' });
+    await fetch(`${apiBase()}/api/xdm/blog/${id}`, { method: 'DELETE' });
     setPosts((p) => p.filter((x) => x.id !== id));
   };
 

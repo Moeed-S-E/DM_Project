@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiBase } from '@/lib/apiBase';
 import AdminAuthGuard from "@/components/AdminAuthGuard";
 import Link from "next/link";
 
@@ -9,7 +10,7 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/products`)
+    fetch(`${apiBase()}/api/xdm/products`)
       .then((r) => r.json())
       .then((data) => setProducts(data))
       .catch(console.error)
@@ -18,7 +19,7 @@ export default function AdminProductsPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this product?')) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/products/${id}`, { method: 'DELETE' });
+    await fetch(`${apiBase()}/api/xdm/products/${id}`, { method: 'DELETE' });
     setProducts((p) => p.filter((x) => x.id !== id));
   };
 

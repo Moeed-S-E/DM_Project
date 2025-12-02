@@ -2,18 +2,50 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiBase } from '@/lib/apiBase';
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    alert("Invalid credentials");
-    setLoading(false);
+    try {
+      const res = await fetch(`${apiBase()}/api/xdm/xadm`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError(body?.error || 'Invalid credentials');
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+      const token = data?.token;
+      if (!token) {
+        setError('Login failed: no token received');
+        return;
+      }
+
+      // Save admin auth with expiry matching server JWT (1 day)
+      const expiry = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem('adminAuth', JSON.stringify({ token, expiry, username }));
+
+      // Redirect to admin dashboard
+      router.push('/xdm/dashboard');
+    } catch (err: any) {
+      setError(err?.message || 'Network error');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,6 +77,7 @@ export default function AdminLoginPage() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+          {error ? <p className="text-sm text-red-500 mt-2">{error}</p> : null}
         </form>
       </div>
     </main>

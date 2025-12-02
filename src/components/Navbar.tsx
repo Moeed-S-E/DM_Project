@@ -4,8 +4,10 @@ import Image from 'next/image';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Theme toggle is interactive but small — load it on client only to avoid adding it to initial bundle
-const ThemeToggle = dynamic(() => import('./ThemeToggle'), { ssr: false });
+const ThemeToggle = dynamic(() => import('./ThemeToggle'), {
+  ssr: false,
+  loading: () => <button aria-hidden className="ml-2 p-2 rounded" />,
+});
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
