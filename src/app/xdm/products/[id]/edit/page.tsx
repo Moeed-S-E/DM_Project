@@ -25,7 +25,7 @@ export default function EditProductPage() {
 
   useEffect(() => {
     if (!params?.id) return;
-    fetch(`/api/admin/products/${params.id}`)
+    fetch(`/api/xdm/products/${params.id}`)
       .then((r) => r.json())
       .then((data) => {
         if (data.error) {
@@ -71,7 +71,7 @@ export default function EditProductPage() {
       }
     }
     try {
-      const res = await fetch(`/api/admin/products/${params.id}`, {
+      const res = await fetch(`/api/xdm/products/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -83,7 +83,7 @@ export default function EditProductPage() {
         }),
       });
       if (res.ok) {
-        router.push('/admin/products');
+        router.push('/xdm/products');
       } else {
         const errData = await res.json();
         setError(errData.error || 'Failed to update');

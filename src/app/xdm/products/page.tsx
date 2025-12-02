@@ -9,7 +9,7 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/products`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/products`)
       .then((r) => r.json())
       .then((data) => setProducts(data))
       .catch(console.error)
@@ -18,7 +18,7 @@ export default function AdminProductsPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this product?')) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/products/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/xdm/products/${id}`, { method: 'DELETE' });
     setProducts((p) => p.filter((x) => x.id !== id));
   };
 
@@ -27,7 +27,7 @@ export default function AdminProductsPage() {
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">Manage Products</h1>
-          <Link href="/admin/products/new" className="btn">New Product</Link>
+          <Link href="/xdm/products/new" className="btn">New Product</Link>
         </div>
 
         {loading ? (
@@ -39,7 +39,7 @@ export default function AdminProductsPage() {
                 <h3 className="font-semibold">{p.title}</h3>
                 <p className="text-sm text-[var(--text-muted)]">{p.category} — PKR {Math.round(p.price)}</p>
                 <div className="mt-2 flex gap-2">
-                  <Link href={`/admin/products/${p.id}/edit`} className="px-3 py-1 bg-primary-blue text-white rounded">Edit</Link>
+                  <Link href={`/xdm/products/${p.id}/edit`} className="px-3 py-1 bg-primary-blue text-white rounded">Edit</Link>
                   <button onClick={() => handleDelete(p.id)} className="px-3 py-1 bg-red-600 text-white rounded">Delete</button>
                 </div>
               </div>

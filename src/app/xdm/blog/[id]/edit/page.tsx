@@ -21,7 +21,7 @@ export default function EditBlogPage() {
 
   useEffect(() => {
     if (!params?.id) return;
-    fetch(`/api/admin/blog/${params.id}`)
+    fetch(`/api/xdm/blog/${params.id}`)
       .then((r) => r.json())
       .then((data) => {
         if (data.error) {
@@ -66,13 +66,13 @@ export default function EditBlogPage() {
       }
     }
     try {
-      const res = await fetch(`/api/admin/blog/${params.id}`, {
+      const res = await fetch(`/api/xdm/blog/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...post, coverImage: imageUrl }),
       });
       if (res.ok) {
-        router.push('/admin/blog');
+        router.push('/xdm/blog');
       } else {
         const errData = await res.json();
         setError(errData.error || 'Failed to update');

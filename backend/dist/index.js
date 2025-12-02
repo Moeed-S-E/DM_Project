@@ -19,7 +19,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // Admin login
-app.post('/api/admin/xadm', async (req, res) => {
+app.post('/api/xdm/xadm', async (req, res) => {
     const { username, password } = req.body;
     const admin = await prisma.admin.findUnique({ where: { username } });
     if (!admin || !bcryptjs_1.default.compareSync(password, admin.passwordHash)) {

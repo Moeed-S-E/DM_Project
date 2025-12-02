@@ -19,7 +19,7 @@ export default function FlushCacheButton() {
         } catch (e) {}
       }
 
-      const res = await fetch("/api/admin/flush-cache", {
+      const res = await fetch("/api/xdm/flush-cache", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

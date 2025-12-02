@@ -6,10 +6,10 @@ export async function GET() {
 
   // Disallow admin pages and admin API endpoints from being crawled
   const body = `User-agent: *
-Disallow: /admin
-Disallow: /admin/
-Disallow: /api/admin
-Disallow: /api/admin/
+Disallow: /xdm
+Disallow: /xdm/
+Disallow: /api/xdm
+Disallow: /api/xdm/
 Allow: /
 
 Sitemap: ${sitemapUrl}

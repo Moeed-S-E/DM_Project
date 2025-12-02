@@ -9,15 +9,15 @@ export default function AdminAuthGuard({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem("adminAuth");
-      if (!raw) return router.replace("/admin/xadm");
+      if (!raw) return router.replace("/xdm/xadm");
       const parsed = JSON.parse(raw);
       if (!parsed?.expiry || Date.now() > parsed.expiry) {
         localStorage.removeItem("adminAuth");
-        return router.replace("/admin/xadm");
+        return router.replace("/xdm/xadm");
       }
       // otherwise allowed
     } catch (err) {
-      router.replace("/admin/xadm");
+      router.replace("/xdm/xadm");
     }
   }, [router]);
 
