@@ -7,7 +7,8 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const multer_1 = __importDefault(require("multer"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
+// Load PBKDF2 helpers (CommonJS module)
+const { verifyPassword } = require('./lib/password');
 const client_1 = require("@prisma/client");
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const path_1 = __importDefault(require("path"));
@@ -16,13 +17,37 @@ const prisma = new client_1.PrismaClient();
 const uploadProducts = (0, multer_1.default)({ dest: path_1.default.join(__dirname, '../public/products') });
 const uploadBlog = (0, multer_1.default)({ dest: path_1.default.join(__dirname, '../public/blog') });
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: [
+        'http://localhost:3000',
+        'https://mhmmobiles.vercel.app',
+    ],
+    credentials: true
+}));
+// Security headers middleware
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://mhmmobiles.vercel.app; script-src 'self'; style-src 'self' 'unsafe-inline';");
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=()');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Origin-Agent-Cluster', '?1');
+    // Trusted Types header for supported browsers
+    res.setHeader('Trusted-Types', 'default');
+    next();
+});
+// Warm-up endpoint for Render
+app.get('/ping', (req, res) => {
+    res.status(200).json({ ok: true, message: 'pong' });
+});
 app.use(express_1.default.json());
 // Admin login
 app.post('/api/xdm/xadm', async (req, res) => {
     const { username, password } = req.body;
-    const admin = await prisma.admin.findUnique({ where: { username } });
-    if (!admin || !bcryptjs_1.default.compareSync(password, admin.passwordHash)) {
+    const admin = await prisma.admin.findFirst({ where: { username } });
+    if (!admin || !verifyPassword(password, admin.passwordHash)) {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
     const token = jsonwebtoken_1.default.sign({ id: admin.id, username: admin.username }, JWT_SECRET, { expiresIn: '1d' });
@@ -100,7 +125,20 @@ app.post('/api/upload/blog', auth, uploadBlog.single('image'), (req, res) => {
     res.json({ filename: req.file.filename });
 });
 // Contact form
+app.options('/api/contact', (req, res) => {
+    res.set({
+        'Access-Control-Allow-Origin': 'https://mhmmobiles.vercel.app',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+    });
+    res.sendStatus(200);
+});
 app.post('/api/contact', async (req, res) => {
+    res.set({
+        'Access-Control-Allow-Origin': 'https://mhmmobiles.vercel.app',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+    });
     const { name, email, message } = req.body;
     // Configure your SMTP transport here
     const transporter = nodemailer_1.default.createTransport({
