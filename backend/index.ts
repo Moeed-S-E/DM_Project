@@ -3,7 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
-import bcrypt from 'bcryptjs';
+// Load PBKDF2 helpers (CommonJS module)
+const { verifyPassword } = require('./lib/password');
 import { PrismaClient } from '@prisma/client';
 import nodemailer from 'nodemailer';
 import path from 'path';
@@ -46,7 +47,7 @@ app.use(express.json());
 app.post('/api/xdm/xadm', async (req, res) => {
   const { username, password } = req.body;
   const admin = await prisma.admin.findFirst({ where: { username } });
-  if (!admin || !bcrypt.compareSync(password, admin.passwordHash)) {
+  if (!admin || !verifyPassword(password, admin.passwordHash)) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
   const token = jwt.sign({ id: admin.id, username: admin.username }, JWT_SECRET, { expiresIn: '1d' });
